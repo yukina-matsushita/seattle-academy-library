@@ -30,8 +30,17 @@
                         <label class="label">パスワード</label>
                         <input type="password" class="input" id="password" name="password" required>
                         <label class="label">パスワード（確認用）</label>
+                       
                         <input type="password" class="input" id="passwordForCheck" name="passwordForCheck" required>
                         <input type="submit" class="button primary" value="作成する" >
+                        
+                        
+                        <c:if test="${!empty errorPassword}">
+							 <div class="error">${errorPassword}</div>
+						</c:if>
+                        <c:if test="${!empty notHankakuError}">
+							 <div class="error">${notHankakuError}</div>
+						</c:if>
                     </form>
                 </div>
                 <div class="authorization_navi">
