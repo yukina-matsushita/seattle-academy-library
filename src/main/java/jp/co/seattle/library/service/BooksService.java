@@ -75,4 +75,13 @@ public class BooksService {
 
         jdbcTemplate.update(sql);
     }
+
+    //書籍を削除 
+    public void deleteBook(int bookId) {
+        //SQL文
+        String sql = "DELETE FROM books WHERE id = " + bookId;
+        //SQL文を実行
+        jdbcTemplate.update(sql);
+
+    }
 }
