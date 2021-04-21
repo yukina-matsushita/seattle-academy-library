@@ -23,8 +23,8 @@
                 <form method="post" action="login">
                     <div class="title">ログイン</div>
                     <label class="label">メールアドレス</label> <input type="text" class="input" name="email" id="email" autocomplete="off" required /> <label class="label">パスワード</label>
-                    <c:if test="${!empty Errormassage1}">
-                        <div class="error">${Errormassage1}</div>
+                    <c:if test="${!empty errormassage1}">
+                        <div class="error">${errormassage1}</div>
                     </c:if>
                     <input type="password" class="input" id="password" name="password" required /> <input type="submit" class="button primary" value="ログイン" />
                 </form>
