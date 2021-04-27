@@ -26,10 +26,10 @@ public class DeleteBookController {
     /**
      * 対象書籍を削除する
      *
-     * 引数@param locale ロケール情報
-     * 引数@param bookId 書籍ID
-     * 引数@param model モデル情報
-     * 戻り値@return 遷移先画面名
+     * @param locale ロケール情報
+     * @param bookId 書籍ID
+     * @param model モデル情報
+     * @return 遷移先画面名
      */
     @Transactional //削除ボタン押すとここに来る
     @RequestMapping(value = "/deleteBook", method = RequestMethod.POST)
