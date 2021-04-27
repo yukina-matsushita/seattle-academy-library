@@ -66,7 +66,6 @@ public class AccountController {
 
      //メール、パスワード、確認パスワードがどれか一つでも半角英数字ではなかった場合
 
-
      if (!(password.equals(passwordForCheck))) {
 
          model.addAttribute("errorPassword", "パスワードと確認用パスワードが一致しません");

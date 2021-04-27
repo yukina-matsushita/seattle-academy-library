@@ -13,6 +13,8 @@ public class UserCountRowMapper implements RowMapper<UserInfo> {
 
     @Override
     public UserInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+        
+
         // Query結果（ResultSet rs）を、オブジェクトに格納する実装
         UserInfo userInfo = new UserInfo();
         userInfo.setEmail(rs.getString("email"));
