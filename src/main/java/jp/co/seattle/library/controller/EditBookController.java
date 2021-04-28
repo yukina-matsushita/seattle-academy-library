@@ -102,7 +102,7 @@ public class EditBookController {
 
 
         //登録日付、ISBN　バリデーションチェック
-        booksService.editBook(bookInfo);
+
 
         boolean isValidIsbn = isbn.matches("[0-9]{10}|[0-9]{13}|[0-9]{0}");
         boolean flag = false;
@@ -129,6 +129,7 @@ public class EditBookController {
         }
 
         // 書籍情報を更新する   //booksServiceというインスタンスの　editBookというメソッド　bookInfoは引数
+        booksService.editBook(bookInfo);
 
         //本の情報が渡されたら、メソッドが実行される
 
