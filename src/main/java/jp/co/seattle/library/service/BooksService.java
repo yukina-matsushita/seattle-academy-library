@@ -94,4 +94,26 @@ public class BooksService {
         jdbcTemplate.update(sql);
 
     }
+
+    /**
+     * 書籍情報を更新
+    * @param bookInfo 書籍情報
+    */
+    public void editBook(BookDetailsInfo bookInfo) {
+        //"は文字列を認識させたい時に使う、開始と終了で
+        //＋は認識させたい変数の前と後ろ　文字列の中で認識させたい時に使う
+        //’はSQLで必要なもの　”はJavaで必要なもの 
+        String sql = "UPDATE books SET title = '" + bookInfo.getTitle() + "', author ='" + bookInfo.getAuthor() + "', "
+                + "publisher = '" + bookInfo.getPublisher() + "' ,"
+                + "publish_date = '" + bookInfo.getPublishDate() + "' ,"
+                + "thumbnail_name = '" + bookInfo.getThumbnailName() + "' ,"
+                + "thumbnail_url = '" + bookInfo.getThumbnailUrl() + "' ,"
+                + "isbn ='" + bookInfo.getIsbn() + "' ,"
+                + "description = '" + bookInfo.getDescription() + "',"
+                + "upd_date = sysdate() "
+                + "WHERE ID = " + bookInfo.getBookId() + ";";
+        //SQL文実行
+        jdbcTemplate.update(sql);  
+    }
+
 }
