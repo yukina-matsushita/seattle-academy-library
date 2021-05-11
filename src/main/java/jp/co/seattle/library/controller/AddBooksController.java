@@ -44,7 +44,7 @@ public class AddBooksController {
      * @param title 書籍名
      * @param author 著者名
      * @param publisher 出版社
-     * @param file サムネイルファイル
+     * @param file1 サムネイルファイル
      * @param model モデル
      * @return 遷移先画面
      */
@@ -58,6 +58,7 @@ public class AddBooksController {
             @RequestParam("thumbnail") MultipartFile file,
             @RequestParam("isbn") String isbn,
             @RequestParam("description") String description,
+
 
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
