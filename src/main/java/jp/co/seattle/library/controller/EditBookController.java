@@ -132,8 +132,8 @@ public class EditBookController {
         // 書籍情報を更新する   //booksServiceというインスタンスのeditBookというメソッド　bookInfoは引数
         booksService.editBook(bookInfo);
 
-        //ボタンの活性、非活性を決めるメソッド（rentBook）の実行結果を入れる変数をcountとして定義
-        int count = booksService.rentBook(bookId);
+        //ボタンの活性、非活性を決めるメソッドの実行結果を入れる変数をcountとして定義
+        int count = booksService.countRecord(bookId);
         //カウントが0の時は借りれる状態
         if (count == 0) {
             model.addAttribute("returnDisabled", "disabled");

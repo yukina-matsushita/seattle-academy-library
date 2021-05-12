@@ -23,14 +23,19 @@ private RentalService rentalService;
 private BooksService booksService;
 
 //details.jspからここに飛ぶ POSTで揃える
+/**
+ * @param model
+ * @param bookId
+ * @return
+ */
 @RequestMapping(value = "/rentBook", method = RequestMethod.POST) //value＝actionで指定したパラメータ
 
 //RequestParamでname属性を取得
 public String rent(Model model,
         @RequestParam("bookId") int bookId) {
 
-    //rentBookメソッド呼び出し
-    rentalService.rentBook(bookId);
+    //countRecordメソッド呼び出し
+    rentalService.countRecord(bookId);
 
     //第一引数に"変数名"、第二引数に　”送りたい文字列”を書く jspに送る
     model.addAttribute("disabled", "disabled");
@@ -46,6 +51,11 @@ public String rent(Model model,
 
 }
 
+/**
+ * @param model
+ * @param bookId
+ * @return
+ */
 @RequestMapping(value = "/returnBook", method = RequestMethod.POST) //value＝actionで指定したパラメータ
 public String back(Model model,
         @RequestParam("bookId") int bookId) {

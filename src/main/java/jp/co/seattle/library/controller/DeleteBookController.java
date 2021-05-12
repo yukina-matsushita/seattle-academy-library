@@ -40,8 +40,9 @@ public class DeleteBookController {
             Model model) {
         logger.info("Welcome delete! The client locale is {}.", locale);
 
-        //ボタンの活性、非活性を決めるメソッド（rentBook）の実行結果を入れる変数をcountとして定義
-        int count = booksService.rentBook(bookId);
+        //レコードがあるかないかを調べるメソッド（rentBook）の実行結果を入れる変数をcountとして定義
+        //レコードの数(0か1)をcountに入れる
+        int count = booksService.countRecord(bookId);
         //countが0の時は借りれる状態→削除できる
         if (count == 0) {
             booksService.deleteBook(bookId);

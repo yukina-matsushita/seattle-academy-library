@@ -126,7 +126,8 @@ public class BooksService {
      * @return
      */
     //ボタンの活性、非活性を決めるメソッド
-    public int rentBook(int bookId) {
+    //レコードの数を数えて０か１かを返す
+    public int countRecord(int bookId) {
         //レコードがあるかないかを調べるsql文
         String sql = "SELECT COUNT(*) FROM rental WHERE bookId=" + bookId + ";";
         //カウントの結果を返す

@@ -40,7 +40,8 @@ public class DetailsController {
         logger.info("Welcome detailsControler.java! The client locale is {}.", locale);
 
         //ボタンの活性、非活性を決めるメソッド(rentBook)の実行結果を入れる変数をcountとして定義
-        int count = booksService.rentBook(bookId);
+        //レコードの数(0か1)をcountに入れる
+        int count = booksService.countRecord(bookId);
         //カウントが0の時は借りれる状態
         if (count == 0) {
             model.addAttribute("returnDisabled", "disabled");

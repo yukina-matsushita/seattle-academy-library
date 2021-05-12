@@ -12,15 +12,21 @@ public class RentalService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    //借りるメソッド
-    public void rentBook(int bookId) {
+    /**
+     * 書籍を借りる
+     * @param bookId
+     */
+    public void countRecord(int bookId) {
         //bookIdをrentalテーブルに追加するSQL文    
         String sql = "INSERT INTO rental (bookId) VALUE " + "(" + bookId + ")";
 
         jdbcTemplate.update(sql);
     }
 
-    //返すメソッド
+    /**
+     * 書籍を返す
+     * @param bookId
+     */
     public void returnBook(int bookId) {
         //bookIdをrentalテーブルから削除するSQL文    
         String sql = "DELETE FROM rental WHERE bookId = " + bookId + ";";
