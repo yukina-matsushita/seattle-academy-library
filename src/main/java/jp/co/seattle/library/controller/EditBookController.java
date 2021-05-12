@@ -128,12 +128,26 @@ public class EditBookController {
             return "editBook";
         }
 
-        // 書籍情報を更新する   //booksServiceというインスタンスの　editBookというメソッド　bookInfoは引数
+        //本の情報が渡されたら、メソッドが実行される
+        // 書籍情報を更新する   //booksServiceというインスタンスのeditBookというメソッド　bookInfoは引数
         booksService.editBook(bookInfo);
 
-        //本の情報が渡されたら、メソッドが実行される
+        //ボタンの活性、非活性を決めるメソッドの実行結果を入れる変数をcountとして定義
+        int count = booksService.countRecord(bookId);
+        //カウントが0の時は借りれる状態
+        if (count == 0) {
+            model.addAttribute("returnDisabled", "disabled");
+            model.addAttribute("lendingStatus", "貸し出し可");
+            //借りれない状態   
+        } else {
+            model.addAttribute("disabled", "disabled");
+            model.addAttribute("lendingStatus", "貸し出し不可");
 
-        // TODO 登録した書籍の詳細情報を表示するように実装   //BooksServiceの中にあるgetBookIdメソッドを呼び出し
+        }
+
+
+        //登録した書籍の詳細情報を表示する  
+        //BooksServiceの中にあるgetBookIdメソッドを呼び出し
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
         //  詳細画面に遷移する

@@ -39,8 +39,24 @@ public class DetailsController {
         // デバッグ用ログ
         logger.info("Welcome detailsControler.java! The client locale is {}.", locale);
 
+        //ボタンの活性、非活性を決めるメソッド(rentBook)の実行結果を入れる変数をcountとして定義
+        //レコードの数(0か1)をcountに入れる
+        int count = booksService.countRecord(bookId);
+        //カウントが0の時は借りれる状態
+        if (count == 0) {
+            model.addAttribute("returnDisabled", "disabled");
+            model.addAttribute("lendingStatus", "貸し出し可");
+
+            //借りれない状態   
+        } else {
+            model.addAttribute("disabled", "disabled");
+            model.addAttribute("lendingStatus", "貸し出し不可");
+        }
+
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
         return "details";
+
     }
+
 }

@@ -31,6 +31,7 @@ public class DeleteBookController {
      * @param model モデル情報
      * @return 遷移先画面名
      */
+
     @Transactional //削除ボタン押すとここに来る
     @RequestMapping(value = "/deleteBook", method = RequestMethod.POST)
     public String deleteBook(
@@ -39,9 +40,26 @@ public class DeleteBookController {
             Model model) {
         logger.info("Welcome delete! The client locale is {}.", locale);
 
-        booksService.deleteBook(bookId);
-        model.addAttribute("bookList", booksService.getBookList());
-        return "home";
+        //レコードがあるかないかを調べるメソッド（rentBook）の実行結果を入れる変数をcountとして定義
+        //レコードの数(0か1)をcountに入れる
+        int count = booksService.countRecord(bookId);
+        //countが0の時は借りれる状態→削除できる
+        if (count == 0) {
+            booksService.deleteBook(bookId);
+            model.addAttribute("returnDisabled", "disabled");
+            model.addAttribute("lendingStatus", "貸し出し可");
+            model.addAttribute("bookList", booksService.getBookList());
+            return "home";
+
+            //借りれない状態→削除できない
+        } else {
+            model.addAttribute("deleteDisabled", "disabled");
+            model.addAttribute("lendingStatus", "貸し出し不可");
+            model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+            //詳細画面に戻る
+            return "details";
+
+        }
 
     }
 
