@@ -86,6 +86,10 @@ public class BooksService {
         jdbcTemplate.update(sql);
     }
 
+
+    /**
+     * @param bookId
+     */
     //書籍を削除 
     public void deleteBook(int bookId) {
         //SQL文
@@ -113,7 +117,20 @@ public class BooksService {
                 + "upd_date = sysdate() "
                 + "WHERE ID = " + bookInfo.getBookId() + ";";
         //SQL文実行
-        jdbcTemplate.update(sql);  
+        jdbcTemplate.update(sql);
     }
 
+    /**
+     * 
+     * @param bookId
+     * @return
+     */
+    //ボタンの活性、非活性を決めるメソッド
+    public int rentBook(int bookId) {
+        //レコードがあるかないかを調べるsql文
+        String sql = "SELECT COUNT(*) FROM rental WHERE bookId=" + bookId + ";";
+        //カウントの結果を返す
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+
+    }
 }
