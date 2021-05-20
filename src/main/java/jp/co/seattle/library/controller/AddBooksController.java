@@ -32,6 +32,10 @@ public class AddBooksController {
     @Autowired
     private ThumbnailService thumbnailService;
 
+    /**
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/addBook", method = RequestMethod.GET) //value＝actionで指定したパラメータ
     //RequestParamでname属性を取得
     public String login(Model model) {
@@ -44,10 +48,14 @@ public class AddBooksController {
      * @param title 書籍名
      * @param author 著者名
      * @param publisher 出版社
-     * @param file1 サムネイルファイル
+     * @param publishDate
+     * @param file サムネイルファイル
+     * @param isbn
+     * @param description
      * @param model モデル
      * @return 遷移先画面
      */
+    
     @Transactional
     @RequestMapping(value = "/insertBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String insertBook(Locale locale,
@@ -96,8 +104,7 @@ public class AddBooksController {
 
 
 
-        //登録日付、ISBN　バリデーションチェック
-        
+        //ISBNバリデーションチェック
         boolean isValidIsbn = isbn.matches("[0-9]{10}|[0-9]{13}|[0-9]{0}");
         boolean flag = false;
         if(!(isValidIsbn)) {
@@ -105,9 +112,8 @@ public class AddBooksController {
             flag = true;
         }
         
-        //出版日は半角数字のYYYYMMDD形式で入力してください
-        // 日付の書式を指定する
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        //出版日バリデーション
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");  // 日付の書式を指定する
         df.setLenient(false); // 日付解析を厳密に行う設定にする
      
         try {
@@ -120,6 +126,7 @@ public class AddBooksController {
  
         
         if (flag) {
+            model.addAttribute("bookInfo", bookInfo);
             return "addBook";
         }
 

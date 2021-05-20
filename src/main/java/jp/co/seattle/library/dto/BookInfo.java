@@ -7,6 +7,10 @@ import lombok.Data;
 /**
  * 書籍基本情報格納DTO
  */
+/**
+ * @author user
+ *
+ */
 @Configuration
 @Data
 public class BookInfo {
@@ -28,6 +32,14 @@ public class BookInfo {
     }
 
     // コンストラクタ
+    /**
+     * @param bookId
+     * @param title
+     * @param author
+     * @param publisher
+     * @param publishDate
+     * @param thumbnail
+     */
     public BookInfo(int bookId, String title, String author, String publisher, String publishDate, String thumbnail) {
         this.bookId = bookId;
         this.title = title;

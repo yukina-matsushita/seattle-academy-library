@@ -49,7 +49,7 @@ public class LoginController {
 
         // TODO パスワードとメールアドレスの組み合わせ存在チェック実装
         if (selectedUserInfo == null) {
-            model.addAttribute("Errormassage1", "メールアドレスまたはパスワードが適切ではありません");
+            model.addAttribute("errorMessage1", "メールアドレスまたはパスワードが適切ではありません");
             return "login";
         }
         // 本の情報を取得して画面側に渡す

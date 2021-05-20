@@ -44,7 +44,7 @@ public class UsersService {
      * @return ユーザー情報
      */
     public UserInfo selectUserInfo(String email, String password) {
-        // TODO SQL生成
+        // SQL生成
         // SELECT文
 
         String sql = "SELECT ID,EMAIL,PASSWORD FROM users WHERE PASSWORD="
