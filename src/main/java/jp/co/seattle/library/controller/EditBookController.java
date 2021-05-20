@@ -1,5 +1,6 @@
 package jp.co.seattle.library.controller;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -32,29 +33,40 @@ public class EditBookController {
     @Autowired
     private ThumbnailService thumbnailService;
 
+    /**書籍を編集
+     * @param model
+     * @param bookId
+     * @return
+     */
     @RequestMapping(value = "/editBook", method = RequestMethod.POST) //value＝actionで指定したパラメータ
     //RequestParamでname属性を取得
     public String edit(Model model,
             @RequestParam("bookId") int bookId) {
-
+        //編集前の情報が表示される
         model.addAttribute("bookInfo", booksService.getBookInfo(bookId));
+        //編集画面を返す（留まる）
         return "editBook";
     }
 
     /**
-     * 書籍情報を登録する
+     * 書籍情報を更新
      * @param locale ロケール情報
+     * @param bookId　ID
      * @param title 書籍名
      * @param author 著者名
      * @param publisher 出版社
+     * @param publishDate
      * @param file サムネイルファイル
+     * @param isbn　ISBN
+     * @param description　説明文
      * @param model モデル
      * @return 遷移先画面
      */
+    
     @Transactional
     @RequestMapping(value = "/updateBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String updateBook(Locale locale,
-            //submitを受け取ってる 
+            //jspのsubmitを受け取ってる 
             //青がjspの言語、赤がJavaの言語
             @RequestParam("bookId") int bookId,
             @RequestParam("title") String title,
@@ -101,9 +113,7 @@ public class EditBookController {
         }
 
 
-        //登録日付、ISBN　バリデーションチェック
-
-
+        //ISBNバリデーションチェック
         boolean isValidIsbn = isbn.matches("[0-9]{10}|[0-9]{13}|[0-9]{0}");
         boolean flag = false;
         if (!(isValidIsbn)) {
@@ -111,9 +121,8 @@ public class EditBookController {
             flag = true;
         }
 
-        //出版日は半角数字のYYYYMMDD形式で入力してください
-        // 日付の書式を指定する
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        //出版日バリデーションチェック
+        DateFormat df = new SimpleDateFormat("yyyyMMdd"); // 日付の書式を指定する
         df.setLenient(false); // 日付解析を厳密に行う設定にする
 
         try {
@@ -122,9 +131,11 @@ public class EditBookController {
             // 日付妥当性NG時の処理を記述
             model.addAttribute("publishDateError", "出版日は半角数字のYYYYMMDD形式で入力してください");
             flag = true;
+
         }
 
         if (flag) {
+            model.addAttribute("bookInfo", booksService.getBookInfo(bookId));
             return "editBook";
         }
 

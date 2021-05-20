@@ -76,6 +76,15 @@ public class AccountController {
          model.addAttribute("notHankakuError", "半角英数字で入力してください");
          return "createAccount";
      }
+     
+     //そのアカウントは既に存在します
+     //パスワードは被ったとしてもメアドは絶対に被らない
+     //SQLにあるEMAILとユーザーが入力したメアドが同じ時にエラーが出るようにしたい
+     //if () {
+     //  model.addAttribute("exitAccountError","そのアカウントは既に存在します");
+     //}
+     
+     
         userInfo.setPassword(password);
         usersService.registUser(userInfo);
 

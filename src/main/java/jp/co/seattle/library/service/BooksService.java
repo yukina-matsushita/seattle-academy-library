@@ -31,7 +31,6 @@ public class BooksService {
      */
     public List<BookInfo> getBookList() {
 
-        // TODO 取得したい情報を取得するようにSQLを修正
         //書籍ID、書籍名,著者名、出版社名、出版日、サムネイル画像
         List<BookInfo> getedBookList = jdbcTemplate.query(
                 "select id,title,author,publisher,publish_date,thumbnail_url from books order by title",
@@ -58,10 +57,8 @@ public class BooksService {
     }
 
     public int getBookId() {
-        //SQL文    
+        //最新のIDを取得   
         String sql = "SELECT MAX(id) FROM books";
-        //インスタンス生成     
-
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
@@ -86,8 +83,8 @@ public class BooksService {
         jdbcTemplate.update(sql);
     }
 
-
     /**
+     * 削除
      * @param bookId
      */
     //書籍を削除 
@@ -134,4 +131,21 @@ public class BooksService {
         return jdbcTemplate.queryForObject(sql, Integer.class);
 
     }
+
+    //タイトル部分一致検索  
+    /**
+     * @param searchWord
+     * @return 検索結果
+     */
+    //ユーザーが入力した文字列は変数"searchWord"の中に入る
+    public List<BookInfo> getSearchBookList(String searchWord) {
+
+        //入力された文字列が含まれるタイトルの本の情報を取得し、リストに格納
+        List<BookInfo> searchBookList = jdbcTemplate.query(
+                "SELECT * FROM books WHERE TITLE LIKE '%" + searchWord + "%'",
+                new BookInfoRowMapper());
+
+        return searchBookList;
+    }
+
 }

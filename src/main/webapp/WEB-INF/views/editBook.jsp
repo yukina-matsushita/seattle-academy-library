@@ -5,23 +5,15 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-
 <meta charset="UTF-8">
-  
-<title>書籍の編集｜シアトルライブラリ｜シアトルコンサルティング株式会社</title>   
+<title>書籍の編集｜シアトルライブラリ｜シアトルコンサルティング株式会社</title>
 <link href="<c:url value="/resources/css/reset.css" />" rel="stylesheet" type="text/css">
-  
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
-  
 <link href="<c:url value="/resources/css/default.css" />" rel="stylesheet" type="text/css">
-  
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-  
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  
 <script src="resources/js/thumbnail.js"></script>
-    
 <script src="resources/js/addBtn.js"></script>
 </head>
 <body class="wrapper">
@@ -37,7 +29,6 @@
         <div class="right">
                   
             <ul>
-                        
                 <li><a href="<%=request.getContextPath()%>/home" class="menu">Home</a></li>         
                 <li><a href="<%=request.getContextPath()%>/">ログアウト</a></li>       
             </ul>
@@ -53,7 +44,12 @@
                 <div>
                     <span>書籍の画像</span> <span class="care care1">任意</span>
                     <div class="book_thumbnail">
-                        <img class="book_noimg" src="resources/img/noImg.png">
+                        <c:if test="${bookDetailsInfo.thumbnail =='null'}">
+                            <img class="book_noimg" src="resources/img/noImg.png">
+                        </c:if>
+                        <c:if test="${bookDetailsInfo.thumbnail !='null'}">
+                            <img class="book_noimg" src="${bookDetailsInfo.thumbnail}">
+                        </c:if>
                     </div>
                     <input type="file" accept="image/*" name="thumbnail" id="thumbnail">
                 </div>
@@ -67,7 +63,7 @@
                         </c:if>
                         <span>書籍名</span><span class="care care2">必須</span>
                         <c:if test="${!empty bookInfo}">
-                            <input type="text" name="title" value="${bookInfo.title}">
+                            <input required type="text" name="title" value="${bookInfo.title}">
                         </c:if>
                         <c:if test="${empty bookInfo}">
                             <input required type="text" name="title" autocomplete="off">
@@ -76,7 +72,7 @@
                     <div>
                         <span>著者名</span><span class="care care2">必須</span>
                         <c:if test="${!empty bookInfo}">
-                            <input type="text" name="author" value="${bookInfo.author}">
+                            <input required type="text" name="author" value="${bookInfo.author}">
                         </c:if>
                         <c:if test="${empty bookInfo}">
                             <input required type="text" name="author" autocomplete="off">
@@ -85,7 +81,7 @@
                     <div>
                         <span>出版社</span><span class="care care2">必須</span>
                         <c:if test="${!empty bookInfo}">
-                            <input type="text" name="publisher" value="${bookInfo.publisher}">
+                            <input required type="text" name="publisher" value="${bookInfo.publisher}">
                         </c:if>
                         <c:if test="${empty bookInfo}">
                             <input required type="text" name="publisher">
@@ -94,7 +90,7 @@
                     <div>
                         <span>出版日</span><span class="care care2">必須</span>
                         <c:if test="${!empty bookInfo}">
-                            <input type="text" name="publishDate" value="${bookInfo.publishDate}">
+                            <input required type="text" name="publishDate" value="${bookInfo.publishDate}">
                         </c:if>
                         <c:if test="${empty bookInfo}">
                             <input required type="text" name="publishDate">
