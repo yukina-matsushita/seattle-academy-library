@@ -44,14 +44,17 @@
                 <div>
                     <span>書籍の画像</span> <span class="care care1">任意</span>
                     <div class="book_thumbnail">
-                        <c:if test="${bookDetailsInfo.thumbnail =='null'}">
+                    <a href="${bookInfo.thumbnailUrl}" data-lightbox="image-1">
+                        <c:if test="${bookInfo.thumbnailUrl =='null'}">
                             <img class="book_noimg" src="resources/img/noImg.png">
                         </c:if>
-                        <c:if test="${bookDetailsInfo.thumbnail !='null'}">
-                            <img class="book_noimg" src="${bookDetailsInfo.thumbnail}">
+                        <c:if test="${bookInfo.thumbnailUrl !='null'}">
+                            <img class="book_noimg" src="${bookInfo.thumbnailUrl}">
                         </c:if>
+                        </a>
                     </div>
-                    <input type="file" accept="image/*" name="thumbnail" id="thumbnail">
+                   
+                   <input type="file" accept="image/*" name="thumbnail" id="thumbnail">
                 </div>
                 <div class="content_right">
                     <div>
@@ -116,7 +119,8 @@
                     </div>
                     <input type="hidden" id="bookId" name="bookId" value="${bookInfo.bookId}">
                 </div>
-            </div>
+                </div> 
+        
             <div class="addBookBtn_box">
                 <button type="submit" id="add-btn" class="btn_addBook">更新</button>
             </div>
