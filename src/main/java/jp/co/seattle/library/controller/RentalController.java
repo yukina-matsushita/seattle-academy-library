@@ -40,6 +40,7 @@ public String rent(Model model,
     //第一引数に"変数名"、第二引数に　”送りたい文字列”を書く jspに送る
     model.addAttribute("disabled", "disabled");
     model.addAttribute("lendingStatus", "貸し出し不可");
+    model.addAttribute("editError", "貸出中のため編集・削除できません");
 
     //情報を渡してあげる
     model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
@@ -63,7 +64,7 @@ public String back(Model model,
     //returnBookメソッド呼び出し
     rentalService.returnBook(bookId);
 
-    //第一引数に"変数名"、第二引数に　”送りたい文字列”を書く jspに送る
+    //第一引数に"変数名"、第二引数に”送りたい文字列”を書く jspに送る
     model.addAttribute("returnDisabled", "disabled");
     model.addAttribute("lendingStatus", "貸し出し可");
 

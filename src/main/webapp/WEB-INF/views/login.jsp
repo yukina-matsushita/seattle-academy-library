@@ -13,6 +13,7 @@
 <link href="<c:url value="/resources/css/login.css" />" rel="stylesheet" type="text/css">
 </head>
 <body>
+            
     <div class="wrapper">
         <div class="authorization_head">
             <img class="mark" src="resources/img/logo.png" />
