@@ -25,11 +25,22 @@
         </div>
     </header>
     <main>
+            <nav id="menubar">
+                <ul class="menu2">
+                    <li><a href="<%=request.getContextPath()%>/addBook">書籍の追加</a></li>
+                    <li><a href="<%=request.getContextPath()%>/bulkRegistration">一括登録</a></li> 
+                </ul>
+            </nav>
+            <img class="main" src="resources/img/mainBackimg.jpg" />
+
         <h1>Home</h1>
-        <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkRegistration" class="btn_bulk_book">一括登録</a>
+
         <div>
             <form method="post" action="<%=request.getContextPath()%>/search">
-                <label class="label2">タイトル検索ができます</label> <input type="search1" class="input" id="search1" name="searchWord" required> <input type="submit" name="search_box" value="検索">
+                <label class="label2">タイトル検索ができます</label> 
+                <input type="text" class="input" id="search1" name="searchWord" required> 
+                <input type="submit" name="search_box" value="検索">
+
             </form>
         </div>
         <div class="content_body">
@@ -81,5 +92,8 @@
         </div>
         </div>
     </main>
+    <p class="nav-fix-pos-pagetop">
+        <a href="#">↑</a>
+    </p>
 </body>
 </html>
