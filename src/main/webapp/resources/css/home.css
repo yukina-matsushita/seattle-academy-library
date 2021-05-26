@@ -175,6 +175,7 @@ a.btn_add_book, a.btn_bulk_book, button.btn_addBook, button.btn_editBook,
 
 a.btn_bulk_book {
 
+
 	background-color: #66cdaa;
 }
 
@@ -227,6 +228,7 @@ a:hover, button:hover {
 .detail_book_content .content_right {
 	width: 275px;
 }
+
 
 .detail_book_content .content_right p {
 	padding: 5px 0;
@@ -342,6 +344,7 @@ hr.border_add {
 }
 
 
+
 .menubar li{
 	display: inline-block;
 	margin: 0 1%;
@@ -361,5 +364,6 @@ hr.border_add {
 	border-bottom: 2px solid transparent;
 	padding-bottom: 7px;
 	transition: 0.5s;
+
 
 }

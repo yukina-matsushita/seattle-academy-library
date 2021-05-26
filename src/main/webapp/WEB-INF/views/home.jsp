@@ -34,11 +34,13 @@
             <img class="main" src="resources/img/mainBackimg.jpg" />
 
         <h1>Home</h1>
+
         <div>
             <form method="post" action="<%=request.getContextPath()%>/search">
                 <label class="label2">タイトル検索ができます</label> 
                 <input type="text" class="input" id="search1" name="searchWord" required> 
                 <input type="submit" name="search_box" value="検索">
+
             </form>
         </div>
         <div class="content_body">
@@ -87,6 +89,7 @@
                     </div>
                 </c:forEach>
             </div>
+        </div>
         </div>
     </main>
     <p class="nav-fix-pos-pagetop">
