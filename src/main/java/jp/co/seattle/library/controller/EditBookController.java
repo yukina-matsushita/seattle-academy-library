@@ -23,6 +23,10 @@ import jp.co.seattle.library.service.ThumbnailService;
 /**
  * Handles requests for the application home page.
  */
+/**
+ * @author user
+ *
+ */
 @Controller //APIの入り口
 public class EditBookController {
     final static Logger logger = LoggerFactory.getLogger(AddBooksController.class);
@@ -44,6 +48,7 @@ public class EditBookController {
             @RequestParam("bookId") int bookId) {
         //編集前の情報が表示される
         model.addAttribute("bookInfo", booksService.getBookInfo(bookId));
+
         //編集画面を返す（留まる）
         return "editBook";
     }
@@ -153,7 +158,7 @@ public class EditBookController {
         } else {
             model.addAttribute("disabled", "disabled");
             model.addAttribute("lendingStatus", "貸し出し不可");
-
+            model.addAttribute("editError", "貸出中のため編集・削除できません");
         }
 
 

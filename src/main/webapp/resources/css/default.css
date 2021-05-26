@@ -61,19 +61,8 @@ input[type=email]{
     width: 99.2%;
     text-indent: 1em;
     outline: none;
-    }
-    
-
-input[type=search1]{
-    font-size:100%;
-    padding: 5px 0;
-    width: 250px;
-    text-indent: 1em;
-    outline: none;
-    }
-    
+}
 /* 基本デザイン：テキストボックス系(フォーカス時) */
-
 input[type=text]:focus,
 input[type=password]:focus {
     background: #ffffcc;
@@ -90,7 +79,6 @@ input[type=button] {
     background: linear-gradient(to bottom, #eeeeee 0%,#eeeeee 100%);
     cursor: pointer;
 }
-
 /* 基本デザイン：コマンドボタン系（メイン操作） */
 input[type=submit].primary,
 input[type=button].primary {
@@ -126,9 +114,6 @@ input[type=button].primary {
     border :solid 1px white;
     border-radius: 0.2em;
 }
-
-
-
 /* 入力フォームのパーツ：エラーメッセージ */
 .error {
     display: block;

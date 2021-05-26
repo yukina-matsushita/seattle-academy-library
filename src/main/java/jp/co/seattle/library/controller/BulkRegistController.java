@@ -49,11 +49,13 @@ public class BulkRegistController {
     }
 
     /**
-     * @param locale
-     * @param csvFile
-     * @param model
-     * @return
-     */
+    * bulkRegistBookメソッド
+    * csvファイルを読み込み、書籍の一括登録をする
+    * @param locale
+    * @param csvFile
+    * @param model
+    * @return  
+    * */
     @Transactional //bulkRegist.jspからここに飛んでくる
     @RequestMapping(value = "/bulkRegist", method = RequestMethod.POST) //value＝actionで指定したパラメータ
     public String bulkRegistBook(Locale locale,
@@ -61,36 +63,39 @@ public class BulkRegistController {
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
         //bookData本棚（リスト）　bulkは本一冊（配列）
-        //取り込んだデータ（配列）をリストに格納
+        //取り込んだデータ（配列）を格納するためのリスト　
         List<String[]> bookData = new ArrayList<String[]>();
-        //エラーをリストに格納
+        //エラーを格納するためのリスト
         List<String> errorList = new ArrayList<String>();
 
         String line;
 
         boolean flag = false;
 
-        try {
-            //Maltipartfileを読み込み
-            InputStream stream = csvFile.getInputStream();
-            //インスタンス生成
-            Reader reader = new InputStreamReader(stream);
-            BufferedReader buf = new BufferedReader(reader);
+        //Maltipartfileを読み込み
+        try (InputStream stream = csvFile.getInputStream();
+                Reader reader = new InputStreamReader(stream);
+                BufferedReader buf = new BufferedReader(reader);) {
+
+            //csvファイルの行がない時の処理
+            if (csvFile.isEmpty()) {
+                errorList.add("CSVファイルが空です。値を入力してください");
+                flag = true;
+            }
 
             int a = 0; //a行目でエラー
 
-            //読み込んだファイルに行がある時の処理
+            //読み込んだファイルに行がある時の処理  //本の情報がなくなるまで繰り返す
             while ((line = buf.readLine()) != null) {
-                String[] bulk = line.split(",");
+                String[] bulk = line.split(",", -1);
                 a++;
-                //本棚に本を追加してる
-                bookData.add(bulk);
-                //本の情報がなくなるまで繰り返す
 
-                //行がない時の処理
-                if (csvFile.isEmpty()) {
-                    errorList.add("必須項目が入力されていません");
-                    return "bulkRegist";
+                //必須項目があるかチェック
+                if ((bulk[0].isEmpty()) || bulk[0] == null || (bulk[1].isEmpty()) || bulk[1] == null
+                        || (bulk[2].isEmpty()) || bulk[2] == null || (bulk[3].isEmpty()) || bulk[3] == null) {
+                    errorList.add(a + "行目の必須項目が入力されていません");
+                    flag = true;
+
                 }
 
                 //出版日バリデーションチェック
@@ -104,20 +109,21 @@ public class BulkRegistController {
                 }
 
                 //ISBNバリデーションチェック
-
-                if ((bulk[4] != null || bulk[4].isEmpty()) && !bulk[4].matches("[0-9]{10}|[0-9]{13}")) {
+                if ((bulk[4].isEmpty()) || !bulk[4].matches("[0-9]{10}|[0-9]{13}")) {
                     errorList.add(a + "行目のISBNの桁数が10か13ではありません。もしくは半角英数字ではありません");
                     flag = true;
                 }
 
-            }
+                //リストに配列（ファイルの中にある本の情報）を追加
+                bookData.add(bulk);
+
+            } //ここまで繰り返し
+
             //リストに格納されたエラーを表示
             if (flag) {
                 model.addAttribute("errorList", errorList);
                 return "bulkRegist";
             }
-
-            buf.close();
 
             //書籍を登録
             for (int i = 0; i < bookData.size(); i++) {
