@@ -23,9 +23,14 @@
 }
 /* リンクボタン：通常 */
 a {
-    color: #707070;
-    text-decoration: none;
-    cursor: pointer;
+   text-decoration: none;
+	display: block;
+	text-align: center;
+	width: 140px;
+	color: black;
+	border-bottom: 2px solid transparent;
+	padding-bottom: 6px;
+	transition: 0.5s;
 }
 /* リンクボタン：優先 */
 a.primary {
@@ -104,14 +109,21 @@ input[type=button].primary {
     margin: 10px;
     width: 99.2%;
     font-weight: bold;
-    text-shadow:0px 0px 2px #707070;
+    text-shadow:0px 0px 2px white;
 }
+
+.label2 {
+    display: block;
+    margin: 10px;
+    width: 99.2%;
+}
+
 /* 入力フォームのパーツ：テキストボックス */
 .input {
     display: block;
     margin: 10px 0;
     width:99.2%;
-    border :solid 1px #707070;
+    border :solid 1px white;
     border-radius: 0.2em;
 }
 
@@ -128,6 +140,17 @@ input[type=button].primary {
     border-radius: 0.2em;
     background: #ffeeee;
 }
+.edit_error {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    font-weight: bold;
+    color: #cc0000;
+    border:solid 1px #cc0000;
+    border-radius: 0.2em;
+    background: #ffeeee;
+    font-size: 14px;
+}
 /* 入力フォームのパーツ：ボタン */
 .button {
     display: block;
@@ -138,11 +161,16 @@ input[type=button].primary {
 
 /* 共通ヘッダー */
 header {
-    display: flex;
+	display: flex;
     align-items: center;
     border-bottom: solid 1px #cbcbcb;
-    padding:10px;
+    padding:13px;
+	animation-name: opa1;
+	animation-delay: 1S;
+	animation-duration: 1S;
+	animation-fill-mode: both;
 }
+
 
 /* 共通ヘッダー（左） */
 header > .left {
@@ -230,15 +258,25 @@ header > .right {
 }
 header > .right > ul{
     display:flex;
+    margin-left: auto;
 }
 header > .right > ul > li{
-    margin-right: 15px;
+   margin-left: auto;
 }
 /* 共通ヘッダー（右）アンカー */
 header > .right a {
     font-size: 90%;
-    margin: 10px;
+    margin-left: auto;
+    
 }
+
+header > .right a:hover{
+    border-bottom: 2px solid #fff;	/*下線の幅、線種、色*/
+	letter-spacing: 0.1em;
+	transition: 0.5s;	
+	border-bottom: 2px solid black;
+}
+
 
 /* ページナビゲーション */
 main > .operation {
@@ -258,11 +296,36 @@ main > .operation > .keyword {
 main {
     margin: 20px;
     /* min-height: 1024px; */
+    background:url(/SeattleLibrary/src/main/webapp/resources/img/main-img.jpg) no-repeat center center / cover;	/*背景画像の読み込み*/
 }
+
+main .header{
+	background:url(../images/main-img.jpg) no-repeat center center / cover;
+	display: flex;
+    align-items: center;
+    padding:10px;
+    display: inline-block;
+	margin: 0 1%;
+	animation-name: opa1;
+	animation-delay: 1S;
+	animation-duration: 1S;
+	animation-fill-mode: both;
+}
+main.img{
+	position: relative;
+	width: 1000;
+}
+	
+
+
 /* コンテンツ本体 */
 main .content_body {
     display: flex;
     flex-wrap: wrap;
+}
+.content_body.detail_book_content{
+	background-color:#1dafc1
+	
 }
 
 /* 共通フッター */
@@ -281,13 +344,72 @@ footer > .copyright {
 ul {
   list-style: none;
 }
+ul li a{
+	margin:20;
+    padding:5;
+    font-size:100%;
+    vertical-align:baseline;
+    background: #d0e02f;
+}
 
 h1 {
-  padding: 0.4em 0.5em;
-  color: #707070;
-  border-left: solid 5px #7db4e6;
+  padding: 1em 0.9em;
+  color: white;
+  border-left: solid 5px black;
+  border-bottom: solid 1px white;
 }
+
 .error_msg {
     color: red;
     font-weight: bold;
+}
+
+.menu2 li a:hover{
+	/*下線の幅、線種、色*/
+	letter-spacing: 0.1em;			/*文字間隔を少しだけ広くする指定。そのままがいいならこの１行を削除。*/
+	text-decoration: none;
+	display: block;
+	text-align: center;
+	width: 140px;
+	color: black;
+	border-bottom: 2px solid black;
+	padding-bottom: 7px;
+	transition: 0.5s;
+	
+}
+
+.nav-fix-pos-pagetop a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    position: fixed;
+    animation-name: opa1;
+    animation-duration: 1s;
+    animation-delay: 1S;
+    animation-fill-mode: forwards;
+    width: 70px;
+    line-height: 60px;
+    bottom: 50px;
+    right: 3%;
+    background: #555;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border-radius: 50%;
+}
+
+.nav ul{
+	display: flex;
+    align-items: center;
+    padding:10px;
+    display: inline-block;
+	margin: 0 1%;
+	animation-name: opa1;
+	animation-delay: 1S;
+	animation-duration: 1S;
+	animation-fill-mode: both;
+}
+
+img.main{
+	max-width: 1400px;	/*最大幅。これ以上広くならない指定。*/
+	margin: 0 10 10 0;
 }
