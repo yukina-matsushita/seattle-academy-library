@@ -32,7 +32,7 @@
             <div class="bulk_form">
                 <h2>CSVファイルをアップロードすることで書籍を一括で登録できます。</h2>
                 <div class="caution">
-                    <p>「書籍名,著者名,出版社,出版日,ISBN」の形式で記載してください。</p>
+                    <p>「書籍名,著者名,出版社,出版日,ISBN,説明文」の形式で記載してください。</p>
                     <p>※サムネイル画像は一括登録できません。編集画面で１冊単位で登録してください。</p>
                 </div>
                 <div>
@@ -40,7 +40,10 @@
                         <input type="file" accept=".csv" id="upload_csv" name="csvFile">
                     </div>
                     <c:if test="${!empty errorList}">
-                        <div class="error">${errorList}</div>                                                  </div>
+                        <div class="error">${errorList}</div>
+                    </c:if>
+                    <c:if test="${!empty readError}">
+                        <div class="">${readError}</div>
                     </c:if>
                 </div>
                 <div class="content_right">
@@ -49,7 +52,7 @@
                     </div>
                 </div>
                 <c:if test="${not empty registComplete}">
-                        <div class="error_msg">${registComplete}</div>
+                    <div class="error_msg">${registComplete}</div>
                 </c:if>
         </form>
     </main>

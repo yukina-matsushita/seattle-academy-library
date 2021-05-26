@@ -55,6 +55,7 @@ public class DeleteBookController {
         } else {
             model.addAttribute("deleteDisabled", "disabled");
             model.addAttribute("lendingStatus", "貸し出し不可");
+            model.addAttribute("editError", "貸出中のため編集・削除できません");
             model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
             //詳細画面に戻る
             return "details";

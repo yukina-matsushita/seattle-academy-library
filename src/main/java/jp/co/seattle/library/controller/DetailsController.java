@@ -51,6 +51,7 @@ public class DetailsController {
         } else {
             model.addAttribute("disabled", "disabled");
             model.addAttribute("lendingStatus", "貸し出し不可");
+            model.addAttribute("editError", "貸出中のため編集・削除できません");
         }
 
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
